@@ -40,9 +40,9 @@
     <section class="content_part">
         <div class="expense_container">
             {% if expense.paid %}
-                <a href="/expenses/unpay/{{ expense.id }}" class="btn_2 bg-yellow mb-4" style="border: none; width: 100%;">Não Paga</a>
+                <a href="/expenses/pay/{{ expense.id }}" class="btn_2 bg-yellow mb-4" style="border: none; width: 100%;">Paga</a>
             {% else %}
-                <a href="/expenses/pay/{{ expense.id }}" class="btn_2 bg-blue mb-4" style="border: none; width: 100%;">Paga</a>
+                <a href="/expenses/unpay/{{ expense.id }}" class="btn_2 bg-blue mb-4" style="border: none; width: 100%;">Não Paga</a>
             {% endif %}
             <form action="/expenses/update/{{ expense.id }}" method="post">
                 <div class="mb-3">
