@@ -24,10 +24,12 @@ class ExpenseController():
         user = Users.query.filter_by(id=session['user_id']).first()
         return render_template('expenses/create.html', user=user)
 
+
+  
     def edit(id):
         if 'user_id' not in session:
-            flash('Faça o login novamente', 'error')
-            return redirect('/login')
+            flash('update', 'success')
+            return redirect('/update')
 
         user = Users.query.filter_by(id=session['user_id']).first()
         expense = Expenses.query.filter_by(id=id).first()
@@ -38,6 +40,8 @@ class ExpenseController():
 
         return render_template('expenses/edit.html', user=user, expense=expense)
 
+
+  
     def store():
         if 'user_id' not in session:
             flash('Faça o login novamente', 'error')
@@ -62,8 +66,8 @@ class ExpenseController():
 
     def update(id):
         if 'user_id' not in session:
-            flash('Faça o login novamente', 'error')
-            return redirect('/login')
+            flash('editar', 'success')
+            return redirect('/update')
 
         expense = Expenses.query.filter_by(id=id).first()
 
@@ -74,10 +78,11 @@ class ExpenseController():
         expense.title = request.form.get('title')
         expense.value = request.form.get('value')
         expense.due_date = datetime.strptime(request.form.get('due_date'), '%Y-%m-%d').date()
-    
+        db.session.commit()
         flash('Despesa editada com sucesso', 'success')
         return redirect('/dashboard')
 
+      
     def pay(id):
         if 'user_id' not in session:
             flash('Faça o login novamente', 'error')
